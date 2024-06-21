@@ -18,12 +18,23 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.add,
+            child: InkWell(
+              splashColor: Colors.amber,
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container();
+                    });
+              },
+              child: Icon(
+                Icons.add,
+              ),
             ),
           ),
         ],
       ),
+      body: InkWell(onTap: () {}, child: Text("body")),
     );
   }
 }
