@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rb_todo_app/addToDo.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,7 +25,11 @@ class _MainScreenState extends State<MainScreen> {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      return Container();
+                      return Container(
+                        padding: EdgeInsets.all(20),
+                        height: 200,
+                        child: AddToDo(),
+                      );
                     });
               },
               child: Icon(
@@ -34,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: InkWell(onTap: () {}, child: Text("body")),
+      body: Container(),
     );
   }
 }
