@@ -9,12 +9,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String text = "Simple text.";
+  List<String> todoList = ['This is awesome.', 'Amazing'];
 
-  void changeText({required String todoText}) {
+  void addToDo({required String todoText}) {
     setState(() {
-      text = todoText;
+      todoList.insert(0, todoText);
     });
+    Navigator.pop(context);
   }
 
   @override
@@ -39,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
                           padding: EdgeInsets.all(20),
                           height: 200,
                           child: AddToDo(
-                            changeText: changeText,
+                            addToDo: addToDo,
                           ),
                         ),
                       );
@@ -52,9 +53,36 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: Container(
-        child: Text("$text"),
-      ),
+      body: ListView.builder(
+          itemCount: todoList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(20.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              todoList.removeAt(index);
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text("Mark as Done"),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.amber,
+                          ),
+                        ),
+                      );
+                    });
+              },
+              title: Text(todoList[index]),
+            );
+          }),
     );
   }
 }
