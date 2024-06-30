@@ -20,6 +20,25 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void addToDo({required String todoText}) {
+    if (todoList.contains(todoText)) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Already exist."),
+              content: Text("This data already exist."),
+              actions: [
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text("Close"),
+                  ),
+              ],
+            );
+          });
+      return;
+    }
     setState(() {
       todoList.insert(0, todoText);
     });
