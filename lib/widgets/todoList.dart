@@ -37,15 +37,30 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: widget.todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            onTap: () {
-              onItemclicked(index: index);
-            },
-            title: Text(widget.todoList[index]),
-          );
-        });
+    return (widget.todoList.isEmpty)
+        ? Center(child: Text("No Items Found. !"))
+        : ListView.builder(
+            itemCount: widget.todoList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.startToEnd,
+                background: Container(
+                  color: Colors.deepOrange,
+                ),
+                onDismissed: (direction) {
+                  setState(() {
+                    widget.todoList.removeAt(index);
+                  });
+                  widget.updateLocalData();
+                },
+                child: ListTile(
+                  onTap: () {
+                    onItemclicked(index: index);
+                  },
+                  title: Text(widget.todoList[index]),
+                ),
+              );
+            });
   }
 }
