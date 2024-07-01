@@ -18,6 +18,11 @@ class _AddToDoState extends State<AddToDo> {
         Text("add to do"),
         TextField(
           controller: toDoText,
+          onSubmitted: (value) {
+            if (toDoText.text != "") {
+              widget.addToDo(todoText: toDoText.text);
+            }
+          },
           autofocus: true,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(5),

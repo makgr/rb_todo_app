@@ -106,37 +106,31 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("RB To Do"),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              splashColor: Colors.amber,
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: Container(
-                          padding: EdgeInsets.all(20),
-                          height: 200,
-                          child: AddToDo(
-                            addToDo: addToDo,
-                          ),
-                        ),
-                      );
-                    });
-              },
-              child: Icon(
-                Icons.add,
-              ),
-            ),
-          ),
-        ],
       ),
       body: TodoList(
         todoList: todoList,
         updateLocalData: updateLocalData,
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: CircleBorder(),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    height: 200,
+                    child: AddToDo(
+                      addToDo: addToDo,
+                    ),
+                  ),
+                );
+              });
+        },
+        backgroundColor: Colors.amber,
+        child: Icon(Icons.add),
       ),
     );
   }
