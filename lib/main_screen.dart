@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rb_todo_app/addToDo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/todoList.dart';
 
@@ -62,7 +63,46 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.amber,
+              height: 200,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  'RB To Do',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.5,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                launchUrl(Uri.parse("https://makgr.com"));
+              },
+              leading: Icon(Icons.person),
+              title: Text(
+                "About Me",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                launchUrl(Uri.parse("mailto:xvirus.bd@gmail.com"));
+              },
+              leading: Icon(Icons.email_sharp),
+              title: Text(
+                "Contact",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text("RB To Do"),
